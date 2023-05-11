@@ -5,6 +5,9 @@ import 'package:path/path.dart';
 
 class DBHelper {
   Database? database;
+  DBHelper._();
+
+  static DBHelper dbHelper = DBHelper._();
 
   Future<Database> checkDB() async {
     if (database != null) {
@@ -43,5 +46,15 @@ class DBHelper {
       "paytypes": paytypes,
       "status": status
     });
+  }
+
+
+  Future<List> ReadData() async
+  {
+    database = await checkDB();
+    String query = "SELECT * FROM incexp";
+
+    List dataList = await database!.rawQuery(query);
+    return dataList;
   }
 }
