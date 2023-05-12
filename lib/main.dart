@@ -8,9 +8,12 @@ void main() {
       debugShowCheckedModeBanner: false,
       getPages: [
         GetPage(
+
           name: '/',
           page: () => Student_Screen(),
-        )
+
+
+        ),
       ],
     ),
   );

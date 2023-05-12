@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 
 class DBHelper {
   Database? database;
+
   DBHelper._();
 
   static DBHelper dbHelper = DBHelper._();
@@ -25,7 +26,7 @@ class DBHelper {
       version: 1,
       onCreate: (db, version) {
         String query =
-            "CREATE TABLE incexp(id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT,amount TEXT,notes TEXT,paytypes TEXT,status INTEGER)";
+            "CREATE TABLE incexp(id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT,amount TEXT,notes TEXT,paytypes TEXT,status INTEGER,date TEXT,time TEXT)";
         db.execute(query);
       },
     );
@@ -37,6 +38,8 @@ class DBHelper {
     required notes,
     required paytypes,
     required status,
+    required date,
+    required time,
   }) async {
     database = await checkDB();
     database!.insert("incexp", {
@@ -44,13 +47,13 @@ class DBHelper {
       "amount": amount,
       "notes": notes,
       "paytypes": paytypes,
-      "status": status
+      "status": status,
+      "date": date,
+      "time":time,
     });
   }
 
-
-  Future<List> ReadData() async
-  {
+  Future<List> ReadData() async {
     database = await checkDB();
     String query = "SELECT * FROM incexp";
 
