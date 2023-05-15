@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class Student_Controller extends GetxController {
   RxList<Map> DataList = <Map>[].obs;
 
-  var filter=0;
+  RxInt filter=2.obs;
 
 
   Future<void> readTransaction() async {
