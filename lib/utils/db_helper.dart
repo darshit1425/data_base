@@ -53,11 +53,21 @@ class DBHelper {
     });
   }
 
-  Future<List> ReadData() async {
-    database = await checkDB();
-    String query = "SELECT * FROM incexp";
+  // Future<List> ReadData() async {
+  //   database = await checkDB();
+  //   String query = "SELECT * FROM incexp";
+  //
+  //   List dataList = await database!.rawQuery(query);
+  //   print(dataList);
+  //   return dataList;
+  // }
 
-    List dataList = await database!.rawQuery(query);
-    return dataList;
-  }
+    Future<List<Map>>   ReadData() async {
+    database = await checkDB();
+
+    String query = "SELECT * FROM incexp";
+    List<Map> list = await database!.rawQuery(query);
+    return list;
+
+    }
 }

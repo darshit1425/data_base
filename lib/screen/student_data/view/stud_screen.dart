@@ -21,185 +21,193 @@ class _Student_ScreenState extends State<Student_Screen> {
       text:
           "${DateTime.now().day}/ ${DateTime.now().month}/ ${DateTime.now().year}");
   TextEditingController txtTime = TextEditingController(
-      text:
-          "${TimeOfDay.now().hour}/ ${TimeOfDay.now().minute}");
+      text: "${TimeOfDay.now().hour}:${TimeOfDay.now().minute}");
 
   @override
-  void initState() {}
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: txtCategory,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "category",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: txtCategory,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "category",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: txtAmount,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "Amount",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: txtAmount,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Amount",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: txtNotes,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "Notes",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: txtNotes,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Notes",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: txtPaytypes,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "Payments",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: txtPaytypes,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Payments",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: txtStatus,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "Status",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: txtStatus,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Status",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),  SizedBox(
-                height: 10,
-              ), TextField(
-                controller: txtTime,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "Time",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: txtTime,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Time",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),  SizedBox(
-                height: 10,
-              ), TextField(
-                controller: txtDate,
-                onChanged: (value) {},
-                decoration: InputDecoration(
-                  label: Text(
-                    "Date",
-                    style: TextStyle(color: Colors.blueAccent.shade700),
-                  ),
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Colors.blueAccent.shade700,
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: txtDate,
+                  onChanged: (value) {},
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Date",
+                      style: TextStyle(color: Colors.blueAccent.shade700),
+                    ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        width: 2,
+                        color: Colors.blueAccent.shade700,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Obx(
-                () => ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: student_controller.DataList.length,
-                  itemBuilder: (context, index) =>
-                      Text("${student_controller.DataList[index]['notes']}"),
-                ),
-              ),
-              Center(
-                child: ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  onPressed: () async {
-                    DBHelper.dbHelper.insertData(
-                      category: txtCategory.text,
-                      amount: txtAmount,
-                      notes: txtNotes,
-                      paytypes: txtPaytypes,
-                      status: txtStatus,
-                      date: txtDate,
-                      time: txtTime,
-                    );
-                    student_controller.DataList.value =
-                        await DBHelper.dbHelper.ReadData();
-                  },
-                  child: const Text(
-                    "Show Data",
-                    style: TextStyle(color: Colors.white),
+                // Obx(
+                //   () => ListView.builder(
+                //     shrinkWrap: true,
+                //     itemCount: student_controller.DataList.length,
+                //     itemBuilder: (context, index) =>
+                //         Text("${student_controller.DataList[index]['notes']}"),
+                //   ),
+                // ),
+                Center(
+                  child: ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                    onPressed: () async {
+                      DBHelper.dbHelper.insertData(
+                        category: txtCategory.text,
+                        amount: txtAmount.text,
+                        notes: txtNotes.text,
+                        paytypes: txtPaytypes.text,
+                        status: txtStatus.text,
+                        date: txtDate.text,
+                        time: txtTime.text,
+                      );
+                      // student_controller.DataList.value =
+                      //     await DBHelper.dbHelper.ReadData();
+                    },
+                    child: const Text(
+                      "Show Data",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

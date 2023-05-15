@@ -1,3 +1,4 @@
+import 'package:data_base/screen/read_screen/read_screen.dart';
 import 'package:data_base/screen/student_data/view/stud_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -7,10 +8,10 @@ void main() {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: [
-        GetPage(
+        GetPage( 
 
           name: '/',
-          page: () => Student_Screen(),
+          page: () => Read_Screen(),
 
 
         ),
