@@ -12,9 +12,8 @@ class Read_Screen extends StatefulWidget {
 class _Read_ScreenState extends State<Read_Screen> {
   @override
   void initState() {
-    controller.readTransaction();
-
     super.initState();
+    controller.readTransaction();
   }
 
   Student_Controller controller = Get.put(Student_Controller());
@@ -30,54 +29,63 @@ class _Read_ScreenState extends State<Read_Screen> {
               children: [
                 TextButton(
                   onPressed: () {
-                    controller.filter.value = 2;
+                    controller.readTransaction();
                   },
                   child: Text("All Data"),
                 ),
                 TextButton(
                   onPressed: () {
-                    controller.filter.value = 0;
+                    controller.filterData(status: 0);
                   },
                   child: Text("Income"),
                 ),
                 TextButton(
                   onPressed: () {
-                    controller.filter.value = 1;
+                    controller.filterData(status: 1);
                   },
                   child: Text("Expence"),
                 ),
               ],
             ),
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return controller.filter == controller.DataList[index]
-                      ? Container(
-                          color: Colors.blue,
-                        )
-                      : Container(
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.all(10),
-                          color: controller.DataList[index]['status'] == 0
-                              ? Colors.green.shade100
-                              : Colors.red.shade100,
-                          child: Row(
+              child: Obx(
+                () => ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(10),
+                      color: controller.DataList[index]['status'] == 0
+                          ? Colors.green.shade100
+                          : Colors.red.shade100,
+                      child: Row(
+                        children: [
+                          Text("${controller.DataList[index]['id']}"),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text("${controller.DataList[index]}"),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text("${controller.DataList[index]}"),
-                                ],
-                              )
+                              Text("${controller.DataList[index]['category']}"),
+                              Text("${controller.DataList[index]['amount']}"),
                             ],
                           ),
-                        );
-                },
-                itemCount: controller.DataList.length,
+                          IconButton(onPressed: () {
+
+                          }, icon: Icon(Icons.edit)),
+                          IconButton(
+                            onPressed: () {
+                              controller.deleteData(id: controller.DataList[index]['id']);
+                              controller.readTransaction();
+                            },
+                            icon: Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  itemCount: controller.DataList.length,
+                ),
               ),
             ),
           ],

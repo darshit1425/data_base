@@ -8,12 +8,13 @@ void main() {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: [
-        GetPage( 
-
+        GetPage(
           name: '/',
+          page: () => Student_Screen(),
+        ),
+        GetPage(
+          name: '/read',
           page: () => Read_Screen(),
-
-
         ),
       ],
     ),

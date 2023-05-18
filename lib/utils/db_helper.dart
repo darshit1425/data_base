@@ -49,7 +49,7 @@ class DBHelper {
       "paytypes": paytypes,
       "status": status,
       "date": date,
-      "time":time,
+      "time": time,
     });
   }
 
@@ -62,12 +62,47 @@ class DBHelper {
   //   return dataList;
   // }
 
-    Future<List<Map>>   ReadData() async {
+  Future<List<Map>> ReadData() async {
     database = await checkDB();
 
     String query = "SELECT * FROM incexp";
     List<Map> list = await database!.rawQuery(query);
+    print("${list}");
     return list;
+  }
 
-    }
+  Future<List<Map<String, Object?>>> FilterData({required status}) {
+    String quary = "SELECT * FROM incexp WHERE status=$status";
+    return database!.rawQuery(quary);
+  }
+
+  Future<void> deleteData({required id}) async {
+    database = await checkDB();
+    database!.delete("incexp", where: "id=?", whereArgs: [id]);
+  }
+
+//     UPDATE DATA
+  void updateData({
+    required id,
+    required category,
+    required amount,
+    required notes,
+    required paytypes,
+    required status,
+    required date,
+    required time,
+  }) {
+    database!.update(
+      "incexp",
+      {
+        "category": category,
+        "amount": amount,
+        "notes": notes,
+        "paytypes": paytypes,
+        "status": status,
+        "date": date,
+        "time": time,
+      },
+      whereArgs: [id],where: "id?");
+  }
 }
