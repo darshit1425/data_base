@@ -122,30 +122,27 @@ class _Read_ScreenState extends State<Read_Screen> {
                           IconButton(
                             onPressed: () {
                               txtCategory_u = TextEditingController(
-                                  text: controller.DataList[index]['category']);
-                              txtCategory_u = TextEditingController(
-                                  text: controller.DataList[index]['amount']);
-                              txtCategory_u = TextEditingController(
-                                  text: controller.DataList[index]['notes']);
-                              txtCategory_u = TextEditingController(
-                                  text: controller.DataList[index]['paytypes']);
-                              // txtCategory_u = TextEditingController(
-                              // text: controller.DataList[index]['status']);
-                              txtCategory_u = TextEditingController(
-                                  text: controller.DataList[index]['date']);
-                              txtCategory_u = TextEditingController(
-                                  text: controller.DataList[index]['time']);
-                              // controller.updateData(
-                              //     // id: id,
-                              //     category: txtCategory_u.text,
-                              //     amount: txtAmount_u.text,
-                              //     notes: txtNotes_u.text,
-                              //     paytypes: txtPaytypes_u.text,
-                              //     status: txtStatus_u.text,
-                              //     date: txtDate_u.text,
-                              //     time: txtTime_u.text,
-                              //     id: null);
-                              updateDialog();
+                                  text:
+                                      "${controller.DataList[index]['category']}");
+                              txtAmount_u = TextEditingController(
+                                  text:
+                                      "${controller.DataList[index]['amount']}");
+                              txtNotes_u = TextEditingController(
+                                  text:
+                                      "${controller.DataList[index]['notes']}");
+                              txtPaytypes_u = TextEditingController(
+                                  text:
+                                      "${controller.DataList[index]['paytypes']}");
+                              txtStatus_u = TextEditingController(
+                                  text:
+                                      "${controller.DataList[index]['status']}");
+                              txtDate_u = TextEditingController(
+                                  text:
+                                      "${controller.DataList[index]['date']}");
+                              txtTime_u = TextEditingController(
+                                  text:
+                                      "${controller.DataList[index]['time']}");
+                              updateDialog(index);
                             },
                             icon: Icon(
                               Icons.edit,
@@ -175,7 +172,7 @@ class _Read_ScreenState extends State<Read_Screen> {
     );
   }
 
-  void updateDialog() {
+  void updateDialog(int index) {
     Get.defaultDialog(
       content: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -199,7 +196,6 @@ class _Read_ScreenState extends State<Read_Screen> {
                 ),
               ),
             ),
-
             SizedBox(
               height: 10,
             ),
@@ -221,11 +217,9 @@ class _Read_ScreenState extends State<Read_Screen> {
                 ),
               ),
             ),
-
             SizedBox(
               height: 10,
             ),
-
             TextField(
               controller: txtNotes_u,
               onChanged: (value) {},
@@ -243,11 +237,9 @@ class _Read_ScreenState extends State<Read_Screen> {
                 ),
               ),
             ),
-
             SizedBox(
               height: 10,
             ),
-
             Obx(
               () => DropdownButton(
                 isExpanded: true,
@@ -342,19 +334,17 @@ class _Read_ScreenState extends State<Read_Screen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-
                     controller.updateData(
-                        id: controller.DataList.,
-                        category: txtCategory_u.text,
-                        amount: txtAmount_u.text,
-                        notes: txtNotes_u.text,
-                        paytypes: txtPaytypes_u.text,
-                        status: txtStatus_u.text,
-                        date: txtDate_u.text,
-                        time: txtTime_u.text,
-                        );
+                      id: controller.DataList[index]['id'],
+                      category: txtCategory_u.text,
+                      amount: txtAmount_u.text,
+                      notes: txtNotes_u.text,
+                      paytypes: txtPaytypes_u.text,
+                      status: txtStatus_u.text,
+                      date: txtDate_u.text,
+                      time: txtTime_u.text,
+                    );
                     Get.back();
-                    updateDialog();
                   },
                   child: Text("yes"),
                 ),

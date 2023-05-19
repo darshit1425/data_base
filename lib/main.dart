@@ -1,3 +1,4 @@
+import 'package:data_base/screen/AddCate/AddCate.dart';
 import 'package:data_base/screen/read_screen/read_screen.dart';
 import 'package:data_base/screen/student_data/view/stud_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ void main() {
         GetPage(
           name: '/read',
           page: () => Read_Screen(),
+        ),
+        GetPage(
+          name: '/addCate',
+          page: () => AddCateScreen(),
         ),
       ],
     ),

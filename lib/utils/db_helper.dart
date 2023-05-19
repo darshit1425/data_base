@@ -27,7 +27,11 @@ class DBHelper {
       onCreate: (db, version) {
         String query =
             "CREATE TABLE incexp(id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT,amount TEXT,notes TEXT,paytypes TEXT,status INTEGER,date TEXT,time TEXT)";
+
+        String uary1 =
+            "CREATE TABLE cate (id INTEGER PRIMARY KEY AUTOINCREMENT , cate TEXT)";
         db.execute(query);
+        db.execute(uary1);
       },
     );
   }
@@ -51,15 +55,19 @@ class DBHelper {
       "date": date,
       "time": time,
     });
-    database!.update("incexp", {
-      "category": category,
-      "amount": amount,
-      "notes": notes,
-      "paytypes": paytypes,
-      "status": status,
-      "date": date,
-      "time": time,
-    },whereArgs: ["id"],where: "id=?");
+  }
+
+  Future<void> insertCate({
+    required cate,
+  }) async {
+    database = await checkDB();
+
+    database!.insert(
+      "cate",
+      {
+        "cate": cate,
+      },
+    );
   }
 
   // Future<List> ReadData() async {
@@ -80,6 +88,16 @@ class DBHelper {
     return list;
   }
 
+  Future<List<Map>> ReadCate() async {
+    database = await checkDB();
+
+    String quary = "SELECT * FROM cate";
+
+    List<Map> list = await database!.rawQuery(quary);
+
+    return list;
+  }
+
   Future<List<Map<String, Object?>>> FilterData({required status}) {
     String quary = "SELECT * FROM incexp WHERE status=$status";
     return database!.rawQuery(quary);
@@ -91,17 +109,11 @@ class DBHelper {
   }
 
 //     UPDATE DATA
-  void updateData({
-    required id,
-    required category,
-    required amount,
-    required notes,
-    required paytypes,
-    required status,
-    required date,
-    required time,
-  }) {
-    database!.update(
+
+  /*
+  *
+  *
+  * database!.update(
         "incexp",
         {
           "category": category,
@@ -112,7 +124,34 @@ class DBHelper {
           "date": date,
           "time": time,
         },
-        whereArgs: [id],
+        whereArgs: ["id"],
         where: "id=?");
+        *
+        *
+        * */
+  void updateData({
+    required id,
+    required amount,
+    required notes,
+    required paytypes,
+    required category,
+    required status,
+    required time,
+    required date,
+  }) {
+    database!.update(
+      "incexp",
+      {
+        "category": category,
+        "amount": amount,
+        "notes": notes,
+        "paytypes": paytypes,
+        "status": status,
+        "date": date,
+        "time": time,
+      },
+      whereArgs: [id],
+      where: "id=?",
+    );
   }
 }

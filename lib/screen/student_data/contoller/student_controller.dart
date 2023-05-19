@@ -1,11 +1,14 @@
 import 'package:data_base/abc/abc_helper/abc_helper.dart';
 import 'package:data_base/utils/db_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sqflite/sqflite.dart';
 
 class Student_Controller extends GetxController {
   RxList<Map> DataList = <Map>[].obs;
 
   RxInt filter = 2.obs;
+  RxInt status = 0.obs;
   RxString ChangePayment = "Offline".obs;
 
   Future<void> readTransaction() async {

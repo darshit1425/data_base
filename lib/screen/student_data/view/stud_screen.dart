@@ -1,3 +1,5 @@
+import 'package:data_base/abc/controller/abc_controller.dart';
+import 'package:data_base/screen/AddCate/controllor/AddControllor.dart';
 import 'package:data_base/screen/student_data/contoller/student_controller.dart';
 import 'package:data_base/utils/db_helper.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +25,15 @@ class _Student_ScreenState extends State<Student_Screen> {
   TextEditingController txtTime = TextEditingController(
       text: "${TimeOfDay.now().hour}:${TimeOfDay.now().minute}");
 
+  AddCateControllor addCateControllor = Get.put(
+    AddCateControllor(),
+  );
+
   @override
   void initState() {
     super.initState();
+
+    addCateControllor.readCate();
   }
 
   @override
@@ -35,6 +43,30 @@ class _Student_ScreenState extends State<Student_Screen> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: Text("Income Expense"),
+          actions: [
+            Obx(
+              () => PopupMenuButton(
+                onSelected: (value) {
+                  controller.status.value = value;
+                },
+                initialValue: controller.status.value,
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: Text(
+                      "Income",
+                    ),
+                    value: 0,
+                  ),
+                  PopupMenuItem(
+                    child: Text(
+                      "Expanse",
+                    ),
+                    value: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
           leading: Icon(Icons.save_as_sharp),
         ),
         body: SingleChildScrollView(
@@ -42,21 +74,96 @@ class _Student_ScreenState extends State<Student_Screen> {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-                TextField(
-                  controller: txtCategory,
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    label: Text(
-                      "category",
-                      style: TextStyle(color: Colors.blueAccent.shade700),
-                    ),
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.blueAccent.shade700,
+                // Container(
+                //   height: 50,
+                //   child: Row(
+                //     children: [
+
+                //     ],
+                //   ),
+                // ),
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Obx(
+                                  () => Container(
+                                    height: 500,
+                                    child: Column(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Get.toNamed('/addCate');
+                                          },
+                                          child: Text("Add Category"),
+                                        ),
+                                        Expanded(
+                                          child: GridView.builder(
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                            ),
+                                            itemCount: addCateControllor
+                                                .cateList.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  height: 40,
+                                                  width: 40,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.black12,
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(
+                          Icons.category,
+                        ),
                       ),
-                    ),
+                      Container(
+                        height: 50,
+                        width: 250,
+                        child: TextField(
+                          controller: txtCategory,
+                          onChanged: (value) {},
+                          decoration: InputDecoration(
+                            label: Text(
+                              "category",
+                              style:
+                                  TextStyle(color: Colors.blueAccent.shade700),
+                            ),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: Colors.blueAccent.shade700,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -120,45 +227,6 @@ class _Student_ScreenState extends State<Student_Screen> {
                 //     ),
                 //   ),
                 // ),
-                Obx(
-                  () => DropdownButton(
-                    isExpanded: true,
-                    value: controller.ChangePayment.value,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("Offline"),
-                        value: "Offline",
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Online"),
-                        value: "Online",
-                      ),
-                    ],
-                    onChanged: (value) {
-                      controller.ChangePayment.value = value!;
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  controller: txtStatus,
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    label: Text(
-                      "Status",
-                      style: TextStyle(color: Colors.blueAccent.shade700),
-                    ),
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Colors.blueAccent.shade700,
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -217,6 +285,28 @@ class _Student_ScreenState extends State<Student_Screen> {
                 //     },
                 //   ),
                 // ),
+                SizedBox(
+                  height: 10,
+                ),
+                Obx(
+                  () => DropdownButton(
+                    isExpanded: true,
+                    value: controller.ChangePayment.value,
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Offline"),
+                        value: "Offline",
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Online"),
+                        value: "Online",
+                      ),
+                    ],
+                    onChanged: (value) {
+                      controller.ChangePayment.value = value!;
+                    },
+                  ),
+                ),
                 Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -231,7 +321,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                             amount: txtAmount.text,
                             notes: txtNotes.text,
                             paytypes: controller.ChangePayment.value,
-                            status: txtStatus.text,
+                            status: controller.status.value,
                             date: txtDate.text,
                             time: txtTime.text,
                           );
