@@ -16,36 +16,82 @@ class _Read_ScreenState extends State<Read_Screen> {
     controller.readTransaction();
   }
 
+  TextEditingController txtCategory_u = TextEditingController();
+  TextEditingController txtAmount_u = TextEditingController();
+  TextEditingController txtNotes_u = TextEditingController();
+  TextEditingController txtPaytypes_u = TextEditingController();
+  TextEditingController txtStatus_u = TextEditingController();
+  TextEditingController txtDate_u = TextEditingController(
+      text:
+          "${DateTime.now().day}/ ${DateTime.now().month}/ ${DateTime.now().year}");
+  TextEditingController txtTime_u = TextEditingController(
+      text: "${TimeOfDay.now().hour}:${TimeOfDay.now().minute}");
   Student_Controller controller = Get.put(Student_Controller());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text(
+            "Read Data",
+            style: TextStyle(fontSize: 20),
+          ),
+          elevation: 0,
+          centerTitle: true,
+        ),
         body: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    controller.readTransaction();
-                  },
-                  child: Text("All Data"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    controller.filterData(status: 0);
-                  },
-                  child: Text("Income"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    controller.filterData(status: 1);
-                  },
-                  child: Text("Expence"),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    color: Colors.black,
+                    child: TextButton(
+                      onPressed: () {
+                        controller.readTransaction();
+                      },
+                      child: Text(
+                        "All Data",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.green.shade100,
+                    child: TextButton(
+                      onPressed: () {
+                        controller.filterData(status: 0);
+                      },
+                      child: Text(
+                        "Income",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 15),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.red.shade100,
+                    child: TextButton(
+                      onPressed: () {
+                        controller.filterData(status: 1);
+                      },
+                      child: Text(
+                        "Expence",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: Obx(
@@ -68,14 +114,49 @@ class _Read_ScreenState extends State<Read_Screen> {
                             children: [
                               Text("${controller.DataList[index]['category']}"),
                               Text("${controller.DataList[index]['amount']}"),
+                              Text("${controller.DataList[index]['paytypes']}"),
+                              // Text(      "${controller.DataList[index]['date']}"),
+                              // Text("      ${controller.DataList[index]['time']}"),
                             ],
                           ),
-                          IconButton(onPressed: () {
-
-                          }, icon: Icon(Icons.edit)),
                           IconButton(
                             onPressed: () {
-                              controller.deleteData(id: controller.DataList[index]['id']);
+                              txtCategory_u = TextEditingController(
+                                  text: controller.DataList[index]['category']);
+                              txtCategory_u = TextEditingController(
+                                  text: controller.DataList[index]['amount']);
+                              txtCategory_u = TextEditingController(
+                                  text: controller.DataList[index]['notes']);
+                              txtCategory_u = TextEditingController(
+                                  text: controller.DataList[index]['paytypes']);
+                              // txtCategory_u = TextEditingController(
+                              // text: controller.DataList[index]['status']);
+                              txtCategory_u = TextEditingController(
+                                  text: controller.DataList[index]['date']);
+                              txtCategory_u = TextEditingController(
+                                  text: controller.DataList[index]['time']);
+                              // controller.updateData(
+                              //     // id: id,
+                              //     category: txtCategory_u.text,
+                              //     amount: txtAmount_u.text,
+                              //     notes: txtNotes_u.text,
+                              //     paytypes: txtPaytypes_u.text,
+                              //     status: txtStatus_u.text,
+                              //     date: txtDate_u.text,
+                              //     time: txtTime_u.text,
+                              //     id: null);
+                              updateDialog();
+                            },
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.black,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              controller.deleteData(
+                                id: controller.DataList[index]['id'],
+                              );
                               controller.readTransaction();
                             },
                             icon: Icon(Icons.delete),
@@ -87,6 +168,197 @@ class _Read_ScreenState extends State<Read_Screen> {
                   itemCount: controller.DataList.length,
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void updateDialog() {
+    Get.defaultDialog(
+      content: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: txtCategory_u,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                label: Text(
+                  "category",
+                  style: TextStyle(color: Colors.blueAccent.shade700),
+                ),
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blueAccent.shade700,
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              controller: txtAmount_u,
+              onChanged: (value) {},
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                label: Text(
+                  "Amount",
+                  style: TextStyle(color: Colors.blueAccent.shade700),
+                ),
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blueAccent.shade700,
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+
+            TextField(
+              controller: txtNotes_u,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                label: Text(
+                  "Notes",
+                  style: TextStyle(color: Colors.blueAccent.shade700),
+                ),
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blueAccent.shade700,
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+
+            Obx(
+              () => DropdownButton(
+                isExpanded: true,
+                value: controller.ChangePayment.value,
+                items: [
+                  DropdownMenuItem(
+                    child: Text("Offline"),
+                    value: "Offline",
+                  ),
+                  DropdownMenuItem(
+                    child: Text("Online"),
+                    value: "Online",
+                  ),
+                ],
+                onChanged: (value) {
+                  controller.ChangePayment.value = value!;
+                },
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              controller: txtStatus_u,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                label: Text(
+                  "Status",
+                  style: TextStyle(color: Colors.blueAccent.shade700),
+                ),
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blueAccent.shade700,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              controller: txtTime_u,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                label: Text(
+                  "Time",
+                  style: TextStyle(color: Colors.blueAccent.shade700),
+                ),
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blueAccent.shade700,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              controller: txtDate_u,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                label: Text(
+                  "Date",
+                  style: TextStyle(color: Colors.blueAccent.shade700),
+                ),
+                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Colors.blueAccent.shade700,
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text("cancel"),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+
+                    controller.updateData(
+                        id: controller.DataList.,
+                        category: txtCategory_u.text,
+                        amount: txtAmount_u.text,
+                        notes: txtNotes_u.text,
+                        paytypes: txtPaytypes_u.text,
+                        status: txtStatus_u.text,
+                        date: txtDate_u.text,
+                        time: txtTime_u.text,
+                        );
+                    Get.back();
+                    updateDialog();
+                  },
+                  child: Text("yes"),
+                ),
+              ],
             ),
           ],
         ),

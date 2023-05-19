@@ -1,9 +1,9 @@
+import 'package:data_base/abc/abc_helper/abc_helper.dart';
 import 'package:data_base/utils/db_helper.dart';
 import 'package:get/get.dart';
 
 class Student_Controller extends GetxController {
   RxList<Map> DataList = <Map>[].obs;
-
 
   RxInt filter = 2.obs;
   RxString ChangePayment = "Offline".obs;
@@ -18,5 +18,28 @@ class Student_Controller extends GetxController {
 
   Future<void> filterData({required status}) async {
     DataList.value = await DBHelper.dbHelper.FilterData(status: status);
+  }
+
+  Future<void> updateData({
+    required id,
+    required category,
+    required amount,
+    required notes,
+    required paytypes,
+    required status,
+    required date,
+    required time,
+  }) async {
+    DBHelper.dbHelper.updateData(
+      id: id,
+      category: category,
+      amount: amount,
+      notes: notes,
+      paytypes: paytypes,
+      status: status,
+      date: date,
+      time: time,
+    );
+    readTransaction();
   }
 }

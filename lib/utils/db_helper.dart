@@ -51,6 +51,15 @@ class DBHelper {
       "date": date,
       "time": time,
     });
+    database!.update("incexp", {
+      "category": category,
+      "amount": amount,
+      "notes": notes,
+      "paytypes": paytypes,
+      "status": status,
+      "date": date,
+      "time": time,
+    },whereArgs: ["id"],where: "id=?");
   }
 
   // Future<List> ReadData() async {
@@ -93,16 +102,17 @@ class DBHelper {
     required time,
   }) {
     database!.update(
-      "incexp",
-      {
-        "category": category,
-        "amount": amount,
-        "notes": notes,
-        "paytypes": paytypes,
-        "status": status,
-        "date": date,
-        "time": time,
-      },
-      whereArgs: [id],where: "id?");
+        "incexp",
+        {
+          "category": category,
+          "amount": amount,
+          "notes": notes,
+          "paytypes": paytypes,
+          "status": status,
+          "date": date,
+          "time": time,
+        },
+        whereArgs: [id],
+        where: "id=?");
   }
 }
