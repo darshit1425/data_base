@@ -116,10 +116,10 @@ class _Student_ScreenState extends State<Student_Screen> {
                                             itemBuilder: (context, index) {
                                               return Padding(
                                                 padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Container(
+                                                    const EdgeInsets.all(8.0), child: Container(
                                                   height: 40,
                                                   width: 40,
+                                                  child: Text("${addCateControllor.cateList.length}"),
                                                   decoration: BoxDecoration(
                                                     color: Colors.black12,
                                                     shape: BoxShape.circle,
