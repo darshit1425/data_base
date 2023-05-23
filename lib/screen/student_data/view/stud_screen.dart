@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:data_base/abc/controller/abc_controller.dart';
 import 'package:data_base/screen/AddCate/controllor/AddControllor.dart';
 import 'package:data_base/screen/student_data/contoller/student_controller.dart';
 import 'package:data_base/utils/db_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Student_Screen extends StatefulWidget {
   const Student_Screen({Key? key}) : super(key: key);
@@ -42,7 +45,7 @@ class _Student_ScreenState extends State<Student_Screen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text("Income Expense"),
+          title: const Text("Income Expense"),
           actions: [
             Obx(
               () => PopupMenuButton(
@@ -51,13 +54,13 @@ class _Student_ScreenState extends State<Student_Screen> {
                 },
                 initialValue: controller.status.value,
                 itemBuilder: (context) => [
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     child: Text(
                       "Income",
                     ),
                     value: 0,
                   ),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     child: Text(
                       "Expanse",
                     ),
@@ -67,21 +70,31 @@ class _Student_ScreenState extends State<Student_Screen> {
               ),
             ),
           ],
-          leading: Icon(Icons.save_as_sharp),
+          leading: const Icon(Icons.save_as_sharp),
         ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-                // Container(
-                //   height: 50,
-                //   child: Row(
-                //     children: [
 
-                //     ],
+                //
+                //
+                // Obx(
+                //   () => CircleAvatar(
+                //     radius: 50,
+                //     // backgroundImage: FileImage(File("${controller.path.value}"),),
                 //   ),
                 // ),
+                ElevatedButton(
+                  onPressed: () async {
+                    ImagePicker imagePicker = ImagePicker();
+                    XFile? xfile = await imagePicker.pickImage(
+                        source: ImageSource.gallery);
+                  },
+                  child: Text("Save Image"),
+                ),
+
                 Container(
                   width: double.infinity,
                   height: 50,
@@ -103,12 +116,12 @@ class _Student_ScreenState extends State<Student_Screen> {
                                           onPressed: () {
                                             Get.toNamed('/addCate');
                                           },
-                                          child: Text("Add Category"),
+                                          child: const Text("Add Category"),
                                         ),
                                         Expanded(
                                           child: GridView.builder(
                                             gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 4,
                                             ),
                                             itemCount: addCateControllor
@@ -116,11 +129,14 @@ class _Student_ScreenState extends State<Student_Screen> {
                                             itemBuilder: (context, index) {
                                               return Padding(
                                                 padding:
-                                                    const EdgeInsets.all(8.0), child: Container(
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
                                                   height: 40,
                                                   width: 40,
-                                                  child: Text("${addCateControllor.cateList.length}"),
-                                                  decoration: BoxDecoration(
+                                                  child: Text(
+                                                      "${addCateControllor.cateList.length}"),
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     color: Colors.black12,
                                                     shape: BoxShape.circle,
                                                   ),
@@ -137,7 +153,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                             },
                           );
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.category,
                         ),
                       ),
@@ -153,7 +169,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                               style:
                                   TextStyle(color: Colors.blueAccent.shade700),
                             ),
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 2,
@@ -166,7 +182,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -178,7 +194,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                       "Amount",
                       style: TextStyle(color: Colors.blueAccent.shade700),
                     ),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
@@ -187,7 +203,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -198,7 +214,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                       "Notes",
                       style: TextStyle(color: Colors.blueAccent.shade700),
                     ),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
@@ -207,7 +223,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 // TextField(
@@ -227,7 +243,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                 //     ),
                 //   ),
                 // ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -238,7 +254,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                       "Time",
                       style: TextStyle(color: Colors.blueAccent.shade700),
                     ),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
@@ -247,7 +263,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -258,7 +274,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                       "Date",
                       style: TextStyle(color: Colors.blueAccent.shade700),
                     ),
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
@@ -285,7 +301,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                 //     },
                 //   ),
                 // ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Obx(
@@ -293,11 +309,11 @@ class _Student_ScreenState extends State<Student_Screen> {
                     isExpanded: true,
                     value: controller.ChangePayment.value,
                     items: [
-                      DropdownMenuItem(
+                      const DropdownMenuItem(
                         child: Text("Offline"),
                         value: "Offline",
                       ),
-                      DropdownMenuItem(
+                      const DropdownMenuItem(
                         child: Text("Online"),
                         value: "Online",
                       ),
@@ -364,7 +380,7 @@ class _Student_ScreenState extends State<Student_Screen> {
                   onPressed: () {
                     Get.toNamed('/read');
                   },
-                  child: Text("Next"),
+                  child: const Text("Next"),
                 ),
               ],
             ),
