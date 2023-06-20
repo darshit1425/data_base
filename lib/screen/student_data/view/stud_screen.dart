@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:data_base/abc/controller/abc_controller.dart';
+
 import 'package:data_base/screen/AddCate/controllor/AddControllor.dart';
 import 'package:data_base/screen/student_data/contoller/student_controller.dart';
 import 'package:data_base/utils/db_helper.dart';
@@ -77,7 +77,6 @@ class _Student_ScreenState extends State<Student_Screen> {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
-
                 //
                 //
                 // Obx(
@@ -86,14 +85,14 @@ class _Student_ScreenState extends State<Student_Screen> {
                 //     // backgroundImage: FileImage(File("${controller.path.value}"),),
                 //   ),
                 // ),
-                ElevatedButton(
-                  onPressed: () async {
-                    ImagePicker imagePicker = ImagePicker();
-                    XFile? xfile = await imagePicker.pickImage(
-                        source: ImageSource.gallery);
-                  },
-                  child: Text("Save Image"),
-                ),
+                // ElevatedButton(
+                //   onPressed: () async {
+                //     ImagePicker imagePicker = ImagePicker();
+                //     XFile? xfile = await imagePicker.pickImage(
+                //         source: ImageSource.gallery);
+                //   },
+                //   child: Text("Save Image"),
+                // ),
 
                 Container(
                   width: double.infinity,
