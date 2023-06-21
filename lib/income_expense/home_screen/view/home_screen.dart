@@ -27,12 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
   AddControllor addControllor = Get.put(
     AddControllor(),
   );
-  TextEditingController idu = TextEditingController();
-  TextEditingController PNameu = TextEditingController();
-  TextEditingController Ppriceu = TextEditingController();
-  TextEditingController Ptypeu = TextEditingController();
-  TextEditingController Pnoteu = TextEditingController();
-  TextEditingController Pdateu = TextEditingController(
+  TextEditingController id = TextEditingController();
+  TextEditingController Name = TextEditingController();
+  TextEditingController price = TextEditingController();
+  TextEditingController Ptype = TextEditingController();
+  TextEditingController note = TextEditingController();
+  TextEditingController date = TextEditingController(
       text:
           "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}");
   TextEditingController Ptimeu = TextEditingController(
@@ -61,12 +61,12 @@ leading:    IconButton(
         isScrollControlled: true,
         context: context,
         backgroundColor: Colors.grey.shade400,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.only(
+        //     topLeft: Radius.circular(20),
+        //     topRight: Radius.circular(20),
+        //   ),
+        // ),
         builder: (context) {
           return Padding(
             padding: EdgeInsets.symmetric(
@@ -224,7 +224,7 @@ leading:    IconButton(
                       width: 10,
                     ),
                     Text(
-                      "Date Filter",
+                      "Date Filter ",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -805,17 +805,25 @@ leading:    IconButton(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Text("Transactions",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          )),
+                      Container(
+                        decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2)),
+                        padding: EdgeInsets.all(10),
+                        child: const Text("Transactions",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            )),
+                      ),
                       Spacer(),
-                      InkWell(
-                          onTap: () {
-                            addControllor.ReadData();
-                          },
-                          child: Text("View all")),
+                      Container(
+                        decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2)),
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                            onTap: () {
+                              addControllor.ReadData();
+                            },
+                            child: Text("All Transaction",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)),
+                      ),
                     ],
                   ),
                 ),
@@ -832,12 +840,12 @@ leading:    IconButton(
                             height: 70,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               color: addControllor.ProductList[index]
                                           ['Status'] ==
                                       0
-                                  ? Colors.green.shade100
-                                  : Colors.red.shade100,
+                                  ? Colors.green.shade50
+                                  : Colors.red.shade50,
                             ),
                             alignment: Alignment.center,
                             child: Row(
@@ -874,10 +882,10 @@ leading:    IconButton(
                                               width: 55,
                                               child: Text(
                                                   "${addControllor.ProductList[index]['Pname']}",
-                                                  style: GoogleFonts.poppins(
+                                                  style: TextStyle(
                                                     color: Color(0xff31435b),
                                                     fontWeight: FontWeight.w500,
-                                                    fontSize: 13,
+                                                    fontSize: 14,
                                                   ))),
                                           SizedBox(
                                             width: 65,
@@ -927,19 +935,19 @@ leading:    IconButton(
                                   children: [
                                     IconButton(
                                       onPressed: () {
-                                        idu = TextEditingController(
+                                        id = TextEditingController(
                                             text:
                                                 "${addControllor.ProductList[index]['id']}");
-                                        PNameu = TextEditingController(
+                                        Name = TextEditingController(
                                             text:
-                                                "${addControllor.ProductList[index]['Pname']}");
-                                        Ppriceu = TextEditingController(
+                                                "${addControllor.ProductList[index]['name']}");
+                                        price = TextEditingController(
                                             text:
-                                                "${addControllor.ProductList[index]['Pprice']}");
-                                        Ptypeu = TextEditingController(
+                                                "${addControllor.ProductList[index]['price']}");
+                                        Ptype = TextEditingController(
                                             text:
                                                 "${addControllor.ProductList[index]['Ptype']}");
-                                        Pdateu = TextEditingController(
+                                        date = TextEditingController(
                                             text:
                                                 "${addControllor.ProductList[index]['Pdate']}");
                                         Ptimeu = TextEditingController(
@@ -988,7 +996,7 @@ leading:    IconButton(
               context: context,
               builder: (context) => SingleChildScrollView(
                 child: AlertDialog(
-                  backgroundColor: Colors.grey.shade400,
+                  backgroundColor: Colors.white,
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -996,7 +1004,7 @@ leading:    IconButton(
                         height: 55,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade400,
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
                             color: Colors.black,
@@ -1019,19 +1027,19 @@ leading:    IconButton(
                                       text:
                                           '${addControllor.categoryNameList[addControllor.categoryIndex.value]}');
                                   showModalBottomSheet(
-                                    backgroundColor: Colors.grey.shade400,
+                                    backgroundColor: Colors.white,
                                     context: context,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadiusDirectional.circular(
                                                 20)),
                                     builder: (context) {
-                                      return CategoryBottomsheet();
+                                      return Category_Screen();
                                     },
                                   );
                                 },
                                 icon: Icon(
-                                  Icons.category,
+                                  Icons.category_outlined,
                                   color: Colors.black,
                                 )),
                           ],
@@ -1303,10 +1311,13 @@ leading:    IconButton(
                 Get.back();
               },
               child: Container(
+
+                padding: EdgeInsets.all(10),
                 margin: EdgeInsets.all(10),
                 height: 50,
                 width: 100,
                 decoration: BoxDecoration(
+
                   color: Colors.green,
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -1345,6 +1356,7 @@ leading:    IconButton(
                 height: 50,
                 width: 100,
                 decoration: BoxDecoration(
+
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -1367,7 +1379,7 @@ leading:    IconButton(
       context: context,
       builder: (context) => SingleChildScrollView(
         child: AlertDialog(
-          backgroundColor: Colors.grey.shade400,
+          backgroundColor: Colors.white,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -1395,13 +1407,13 @@ leading:    IconButton(
                               text:
                                   '${addControllor.categoryNameList[addControllor.categoryIndex.value]}');
                           showModalBottomSheet(
-                            backgroundColor: Colors.grey.shade400,
+                            backgroundColor: Colors.white,
                             context: context,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadiusDirectional.circular(20)),
                             builder: (context) {
-                              return CategoryBottomsheet();
+                              return Category_Screen();
                             },
                           );
                         },
@@ -1416,7 +1428,7 @@ leading:    IconButton(
                 height: 10,
               ),
               TextField(
-                controller: Ppriceu,
+                controller:price,
                 onChanged: (value) {},
                 decoration: InputDecoration(
                   label: Text(
@@ -1458,7 +1470,7 @@ leading:    IconButton(
                 height: 10,
               ),
               TextField(
-                controller: Ptypeu,
+                controller: Ptype,
                 onChanged: (value) {},
                 decoration: InputDecoration(
                   suffixIcon: Obx(
@@ -1496,7 +1508,7 @@ leading:    IconButton(
                 height: 10,
               ),
               TextField(
-                controller: Pdateu,
+                controller: date,
                 onChanged: (value) {},
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
@@ -1509,15 +1521,11 @@ leading:    IconButton(
                       builder: (context, child) {
                         return Theme(
                           data: Theme.of(context).copyWith(
-                            colorScheme: ColorScheme.light(
-                              primary: Colors.black,
-                              onPrimary: Colors.white,
-                              onSurface: Colors.black,
-                            ),
+
                             textButtonTheme: TextButtonThemeData(
                               style: TextButton.styleFrom(
                                 foregroundColor:
-                                    Colors.black, // button text color
+                                    Colors.white, // button text color
                               ),
                             ),
                           ),
@@ -1531,7 +1539,9 @@ leading:    IconButton(
                     "date",
                     style: TextStyle(color: Colors.black),
                   ),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+
+                  ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       width: 2,
@@ -1593,10 +1603,10 @@ leading:    IconButton(
                             backgroundColor: Colors.green),
                         onPressed: () {
                           addControllor.updateData(
-                            id: idu.text,
+                            id: id.text,
                             Pname: addControllor.categoryNameList[
                                 addControllor.categoryIndex.value],
-                            Pprice: Ppriceu.text,
+                            Pprice: price.text,
                             Ptype: addControllor.ChangePayment.value,
                             Pdate: addControllor.Pdate.text,
                             Ptime: Ptimeu.text,

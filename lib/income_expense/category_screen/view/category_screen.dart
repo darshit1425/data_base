@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CategoryBottomsheet extends StatelessWidget {
-  const CategoryBottomsheet({Key? key}) : super(key: key);
+class Category_Screen extends StatelessWidget {
+  const Category_Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

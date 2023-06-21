@@ -35,7 +35,7 @@ class _Splash_ScreenState extends State<Splash_Screen> {
           child: Column(
             children: [
               SizedBox(height: 150,),
-              Image.asset("assets/images/img.png",fit: BoxFit.cover
+              Image.asset("assets/images/imge.png",fit: BoxFit.cover
               ),
               SizedBox(height: 100,),
               CircularProgressIndicator(

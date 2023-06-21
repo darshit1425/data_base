@@ -97,15 +97,15 @@ class AddControllor extends GetxController {
   }
 
   RxList<Icon> categoryIconList = <Icon>[
-    Icon(Icons.fastfood, color: Colors.white, size: 22),
-    Icon(Icons.games, color: Colors.white, size: 22),
-    Icon(Icons.airplanemode_on, color: Colors.white, size: 22),
-    Icon(Icons.mobile_friendly_outlined, color: Colors.white, size: 22),
-    Icon(Icons.school, color: Colors.white, size: 22),
-    Icon(Icons.monetization_on_outlined, color: Colors.white, size: 22),
-    Icon(Icons.electrical_services_sharp, color: Colors.white, size: 22),
-    Icon(Icons.ev_station_outlined, color: Colors.white, size: 22),
-    Icon(Icons.movie_filter, color: Colors.white, size: 22),
+    Icon(Icons.fastfood, color: Colors.orange.shade50, size: 22),
+    Icon(Icons.games, color: Colors.blue.shade50, size: 22),
+    Icon(Icons.airplanemode_on, color: Colors.green, size: 22),
+    Icon(Icons.mobile_friendly_outlined, color: Colors.red, size: 22),
+    Icon(Icons.school, color: Colors.yellow, size: 22),
+    Icon(Icons.monetization_on_outlined, color: Colors.amber, size: 22),
+    Icon(Icons.electrical_services_sharp, color: Colors.cyan.shade50, size: 22),
+    Icon(Icons.ev_station_outlined, color: Colors.purple.shade50, size: 22),
+    Icon(Icons.movie_filter, color: Colors.purple, size: 22),
   ].obs;
 
   RxList<String> categoryNameList = <String>[
@@ -121,15 +121,15 @@ class AddControllor extends GetxController {
   ].obs;
 
   RxList<Color> categoryColorList = <Color>[
+    Colors.black87,
+    Colors.blue,
+    Colors.red,
+    Colors.orange,
+    Colors.purpleAccent,
+    Colors.green,
+    Colors.cyan,
     Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
-    Colors.black,
+    Colors.white,
   ].obs;
 
   RxList incomeDataTotal = [].obs;
